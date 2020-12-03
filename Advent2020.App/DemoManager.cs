@@ -5,9 +5,17 @@ namespace Advent2020.App
 {
     public class DemoManager
     {
+        private enum Demos
+        {
+            ReportRepairOne,
+            ReportRepairTwo,
+            Nada = 99
+        }
+
         public void Run()
         {
             var demo = Demos.Nada;
+
             do
             {
                 DisplayMenu();
