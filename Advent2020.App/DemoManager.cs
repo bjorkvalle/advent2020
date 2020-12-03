@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Advent2020.App.DayOne;
+using System;
 
 namespace Advent2020.App
 {
@@ -39,7 +36,10 @@ Available projects
             switch ((Demos)selected)
             {
                 case Demos.ReportRepair:
-                    break;
+                    {
+                        new ReportRepair();
+                        break;
+                    }
                 default:
                     break;
             }
