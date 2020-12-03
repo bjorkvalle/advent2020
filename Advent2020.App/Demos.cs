@@ -8,6 +8,8 @@ namespace Advent2020.App
 {
     enum Demos
     {
-        ReportRepair
+        ReportRepairOne,
+        ReportRepairTwo,
+        Nada = 99
     }
 }

@@ -3,17 +3,49 @@ using System;
 
 namespace Advent2020.App
 {
-    public static class DemoManager
+    public class DemoManager
     {
-        public static void Run()
+        public void Run()
+        {
+            var demo = Demos.Nada;
+            do
+            {
+                DisplayMenu();
+                demo = SelectDemo();
+
+                switch (demo)
+                {
+                    case Demos.ReportRepairOne:
+                        {
+                            Console.WriteLine("\nRunning \"REPORT REPAIR\" demo 1!");
+                            new ReportRepair().RunFirstDemo();
+                            break;
+                        }
+                    case Demos.ReportRepairTwo:
+                        {
+                            Console.WriteLine("\nRunning \"REPORT REPAIR\" demo 2!");
+                            new ReportRepair().RunSecondDemo();
+                            break;
+                        }
+                    default:
+                        break;
+                }
+            } while (demo != Demos.Nada);
+        }
+
+        private void DisplayMenu()
         {
             Console.WriteLine(@"
 Available projects
 ******************
-[0] Day 1: Report Repair
+[0] Day 1: Report Repair, demo 1
+[1] Day 1: Report Repair, demo 2
+[99] End
 ");
+        }
 
-            int minSelect = 0, maxSelect = Enum.GetValues(typeof(Demos)).Length;
+        private Demos SelectDemo()
+        {
             var selected = -1;
             var attempts = 0;
 
@@ -26,23 +58,14 @@ Available projects
                 else if (attempts == 4)
                     Console.WriteLine("Last chance, dude");
                 else if (attempts > 4)
-                    return;
+                    return Demos.Nada;
 
                 Console.Write("Select: ");
                 attempts++;
                 selected = int.TryParse(Console.ReadLine(), out int s) ? s : -1;
-            } while (selected < minSelect && selected > maxSelect);
+            } while (!Enum.IsDefined(typeof(Demos), selected));
 
-            switch ((Demos)selected)
-            {
-                case Demos.ReportRepair:
-                    {
-                        new ReportRepair();
-                        break;
-                    }
-                default:
-                    break;
-            }
+            return (Demos)selected;
         }
     }
 }
